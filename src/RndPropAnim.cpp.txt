@@ -2,8 +2,8 @@
 
 void RndPropAnim::Save(BinStream& bs){
     bs << 15;
-    Hmx::Object::Save(bs);
-    RndAnimatable::Save(bs);
+    SAVE_SUPERCLASS(Hmx::Object);
+    SAVE_SUPERCLASS(RndAnimatable);
     bs << mPropKeys.size();
     for(auto keys : mPropKeys){
         bs << keys->NumKeys(); // i think? it's a virtual method i know that much. could also possibly save the keys type

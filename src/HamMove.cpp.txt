@@ -2,7 +2,7 @@
 
 void HamMove::Save(BinStream& bs){
     bs << 50;
-    RndPropAnim::Save(bs);
+    SAVE_SUPERCLASS(RndPropAnim);
     bs << mMirror;
     bs << mTex;
     bs << mScored;
@@ -31,4 +31,85 @@ void HamMove::Save(BinStream& bs){
     bs << unk94;
     bs << mDancerSeq;
     bs << mConfusabilityID;
+}
+
+void HamMove::Load(BinStream& bs){
+    LOAD_AND_ASSERT_REVS(50, 0) // bsRev = gRev, gAltRev, bs
+    LOAD_SUPERCLASS(RndPropAnim)
+    if(gRev < 4) LOAD_SUPERCLASS(Hmx::Object);
+    else LOAD_SUPERCLASS(RndPropAnim);
+    if(gRev > 7){
+        mMirror.Load(bs, true, nullptr);
+    }
+    if(gRev < 5){ String str; bs >> str; }    
+    ObjPtr<RndTex> tex; tex.Load(bs, true, nullptr);
+    SetTexture(tex);
+    if(gRev > 1){ bsRev >> mScored; }
+    if(gRev > 19){ bsRev >> mFinalPose; }
+    if(gRev > 2 && gRev < 11){
+        // a bunch of unused, deprecated stuff
+    }
+    if(gRev < 16){
+        // more unused deprecated stuff
+    }
+    if(gRev > 4){
+        Symbol language;
+        String name;
+        int count; bs >> count;
+        for(int i = 0; i < count; i++){
+            bs >> language; bs >> name;
+            if(!unkd0){
+                SetName(language, name.c_str());
+            }
+        }
+    }
+    if(gRev < 4){ MILO_WARN("Can't load version older than 4"); }
+    if(gRev < 39){ // unused }
+    if(gRev > 11){ bs >> mTexState; }
+    if(gRev > 12){
+        int numMoveFrames; bs >> numMoveFrames;
+        mMoveFrames.resize(numMoveFrames);
+        for(int i = 0; i < numMoveFrames; i++){
+            mMoveFrames[i].Load(bsRev); // MoveFrame size: 0x11b0
+        }
+    }
+    if(gRev > 14 && gRev < 42){ // unused }
+    if(gRev > 17){ bs >> mParadiddle; }
+    if(gRev > 20){ bs >> mSuppressGuide; }
+    if(gRev > 49){ bs >> mSuppressPracticeOptions; }
+    if(gRev > 33){
+        bool omit; bsRev >> omit;
+        if(!unkd0) mOmitMinigame = omit;
+    }
+    if(gRev > 21){ bs >> mRatingStates; }
+    if(gRev < 26){ // unused }
+    if(gRev > 26){ bs >> mShoulderDisplacements; }
+    if(gRev > 35){
+        for(int i = 0; i < kNumMoveRatings; i++){
+            bs >> mThresholds[i];
+            if(gRev > 44) bs >> mOverrides[i];
+        }
+    }
+    if(gRev > 42){
+        std::map<Hmx::CRC,float> confusabilities;
+        bs >> confusabilities;
+        if(!unkd0){
+            mConfusabilities = confusabilities;
+        }
+    }
+    if(gRev > 46){
+        int assignTo94; bs >> assignTo94;
+        if(!unkd0) unk94 = assignTo94;
+    }
+    if(gRev > 47){
+        mDancerSeq.Load(bs, true, nullptr);
+    }
+    if(gRev > 48){
+        Hmx::CRC crc; // CRC is just an int mCRC
+        bs >> crc;
+        if(!unkd0){
+            mConfusabilityID = crc.mCRC;
+        }
+    }
+    unkd0 = false;
 }

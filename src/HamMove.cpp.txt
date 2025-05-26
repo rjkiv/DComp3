@@ -1,0 +1,34 @@
+#include "HamMove.h"
+
+void HamMove::Save(BinStream& bs){
+    bs << 50;
+    RndPropAnim::Save(bs);
+    bs << mMirror;
+    bs << mTex;
+    bs << mScored;
+    bs << mFinalPose;
+    bs << mLocalizedNames.size();
+    for(int i = 0; i < mLocalizedNames.size(); i++){
+        bs << mLocalizedNames[i].mLanguage;
+        bs << mLocalizedNames[i].mName;
+    }
+    bs << mTexState;
+    bs << mMoveFrames.size();
+    for(int i = 0; i < mMoveFrames.size(); i++){
+        mMoveFrames[i].Save(bs); // MoveFrame size: 0x11b0
+    }
+    bs << mParadiddle;
+    bs << mSuppressGuide;
+    bs << mSuppressPracticeOptions;
+    bs << mOmitMinigame;
+    bs << mRatingStates;
+    bs << mShoulderDisplacements;
+    for(int i = 0; i < 4; i++){
+        bs << mThresholds[i];
+        bs << mOverrides[i];
+    }
+    bs << mConfusabilities;
+    bs << unk94;
+    bs << mDancerSeq;
+    bs << mConfusabilityID;
+}

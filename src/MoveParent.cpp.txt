@@ -1,0 +1,45 @@
+#include "MoveParent.h"
+
+// MoveParent size: 0x4C
+class MoveParent {
+    // vtable at 0x0
+    Symbol unk4;
+    Difficulty mDifficulty; // 0x8
+    bool unkc;
+    std::vector<MoveVariant*> mVariants; // 0x10
+    std::vector<Symbol> mGenreFlags; // 0x1c
+    std::vector<Symbol> mEraFlags; // 0x28
+    std::vector<MoveParent*> unk34;
+    std::vector<MoveParent*> unk40;
+};
+
+void MoveParent::Load(BinStream& bs, MoveGraph* moveGraph){
+    int rev; bs >> rev;
+    bs >> unk4;
+    bs >> mDifficulty;
+
+    int numFlags; bs >> numFlags;
+    mGenreFlags.reserve(numFlags);
+    for(int i = 0; i < numFlags; i++){
+        Symbol flag; bs >> flag;
+        mGenreFlags.push_back(flag);
+    }
+
+    bs >> numFlags;
+    mEraFlags.reserve(numFlags);
+    for(int i = 0; i < numFlags; i++){
+        Symbol flag; bs >> flag;
+        mEraFlags.push_back(flag);
+    }
+
+    bs >> unkc;
+    String unusedStr; bs >> unusedStr;
+
+    bs >> numFlags;
+    mVariants.reserve(numFlags);
+    for(int i = 0; i < numFlags; i++){
+        MoveVariant* var = new MoveVariant();
+        var->Load(bs, moveGraph, this);
+        mVariants.push_back(var);
+    }
+}

@@ -1,0 +1,39 @@
+#include "MoveVariant.h"
+
+void MoveVariant::Load(BinStream& bs, MoveGraph* moveGraph, MoveParent* moveParent){
+    int rev; bs >> rev;
+    mMoveParent = moveParent;
+    bs >> mPositionOffset;
+    bs >> unk10;
+    bs >> mHamMoveName;
+    bs >> mHamMoveMiloName;
+    bs >> mGenre;
+    bs >> mEra;
+    bs >> mSongName;
+    bs >> mAvgBeatsPerSec;
+    bs >> mFlags;
+    
+    bool hasLinks; bs >> hasLinks;
+    if(hasLinks) bs >> mLinkedTo;
+    else mLinkedTo = 0;
+    
+    if(rev > 2) bs >> mLinkedFrom;
+    else {
+        bs >> hasLinks;
+        if(!hasLinks) mLinkedFrom = 0;
+    }
+
+    int numCandidates; bs >> numCandidates;
+    mPrevCandidates.resize(numCandidates);
+    for(int i = 0; i < numCandidates; i++){
+        mPrevCandidates[i].Load(bs);
+    }
+
+    bs >> numCandidates;
+    mNextCandidates.resize(numCandidates);
+    for(int i = 0; i < numCandidates; i++){
+        mNextCandidates[i].Load(bs);
+    }
+
+    moveGraph->unk44[unk10] = this;
+}

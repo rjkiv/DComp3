@@ -45,8 +45,11 @@ class HamMove : public RndPropAnim {
     Symbol mVerb; // 0x98
     Symbol mMoveSound; // 0x9c
     std::vector<float> mRatingStates; // 0xa0
+    // "Whether to use shoudler displacements for detection" - specific to Ham1!
     bool mShoulderDisplacements; // 0xac
+    "Generated threshold for super perfect"/"perfect/flawless"/"awesome/nice"/"ok/almost"
     float mThresholds[kNumMoveRatings]; // 0xb0
+    // "Override threshold for super perfect / perfect/flawless / awesome/nice / ok/almost (0 means no override)"
     float mOverrides[kNumMoveRatings]; // 0xc0
     bool unkd0; // 0xd0
     // "id used when comparing to other moves"

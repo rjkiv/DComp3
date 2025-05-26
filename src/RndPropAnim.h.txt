@@ -1,0 +1,18 @@
+#pragma once
+
+// RndPropAnim size: 0x60
+// "Animate any properties on target object"
+class RndPropAnim : public RndAnimatable {
+    std::list<PropKeys*> mPropKeys; // 0x10
+    int unk18;
+    bool unk1c;
+    // "Do I self loop on SetFrame"
+    bool mLoop; // 0x1d
+    // "fire flow labels in sync with the anim"
+    Symbol mFireFlowLabel; // 0x20
+    // "Scales all animation keyframe values by this #"
+    float mIntensity; // 0x24
+    // "the names of possible flow labels you can place on this timeline (i.e. 'footstep')"
+    std::list<String> mFlowLabels; // 0x28
+    // virtual Object offset: 0x34
+};

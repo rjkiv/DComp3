@@ -1,0 +1,15 @@
+#include "RndPropAnim.h"
+
+void RndPropAnim::Save(BinStream& bs){
+    bs << 15;
+    Hmx::Object::Save(bs);
+    RndAnimatable::Save(bs);
+    bs << mPropKeys.size();
+    for(auto keys : mPropKeys){
+        bs << keys->NumKeys(); // i think? it's a virtual method i know that much
+        keys->Save(bs);
+    }
+    bs << mLoop;
+    bs << mFlowLabels;
+    bs << mIntensity;
+}

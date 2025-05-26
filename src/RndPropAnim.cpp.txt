@@ -6,10 +6,40 @@ void RndPropAnim::Save(BinStream& bs){
     RndAnimatable::Save(bs);
     bs << mPropKeys.size();
     for(auto keys : mPropKeys){
-        bs << keys->NumKeys(); // i think? it's a virtual method i know that much
+        bs << keys->NumKeys(); // i think? it's a virtual method i know that much. could also possibly save the keys type
         keys->Save(bs);
     }
     bs << mLoop;
     bs << mFlowLabels;
     bs << mIntensity;
+}
+
+void RndPropAnim::Load(BinStream& bs){
+    LOAD_AND_ASSERT_REVS(15, 0) // bsRev = gRev, gAltRev, bs
+    LOAD_SUPERCLASS(Hmx::Object)
+    LOAD_SUPERCLASS(RndAnimatable)
+    // some ObjOwnerPtr that never gets used
+    mLastFrame = mFrame; // from RndAnimatable
+    DeleteAll(mPropKeys);
+    if(gRev < 7){
+        LoadPre7(bsRev);
+    }
+    else {
+        int count; bs >> count;
+        for(int i = 0; i < count; i++){
+            AnimKeysType type; bs >> type;
+            PropKeys* keys = AddKeys(nullptr, nullptr, type);
+            keys->Load(bsRev);
+        }
+    }
+    if(gRev > 11){
+        bsRev >> mLoop;
+    }
+    if(gRev > 13){
+        bsRev >> mFlowLabels;
+    }
+    if(gRev > 14){
+        bs >> mIntensity;
+    }
+    // destruction of aforementioned ObjOwnerPtr
 }

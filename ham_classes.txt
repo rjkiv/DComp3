@@ -1,0 +1,58 @@
+as per the ham_objects.dta:
+
+CharFeedback: "Drawable for on-character filter feedback/visualization"
+HamLabel: "Label with Hammer-specific features"
+HamCamShot: "Hammer specific camera shot"
+HamCharacter: "Hammer main character class, can be configured to look like characters in /dancer"
+HamWardrobe: "Manager class that clothes characters and loads animations under different conditions"
+HamDirector: "Hammer Director, sits in each song file and manages camera + scene changes"
+HamDriver: "Class to play back clips, has a tree view of layers"
+HamSkeletonConverter: "Class to convert from a camera to a character skeleton"
+HamRegulate: "Class to do regulation on a HamCharacter.  Has two modes of operation"
+HamIKEffector: "Does IK on end effectors and props"
+HamIKSkeleton: "Manages the neutral skeleton for a HamCharacter"
+SkeletonDir: "Dir with skeleton tracking/debugging functionality"
+MoveDir: "Dir for HamMoves, contains debugging functionality"
+DancerSequence: "Linear sequence of DancerFrame structs, animatable for preview in milo"
+HamMove: "Data associated with a ham Move"
+SkeletonClip: "An animated clip of a skeleton playable in milo"
+SkeletonViz: "Visualization of one natural input skeleton"
+HamListRibbon: "Top-level resource object for UILists"
+HamScrollSpeedIndicator: "Resource object for scrolly stuff"
+HamVisDir: "panel dir that handles the visualizer"
+HamMeterEffectMonitor: "Monitor for FxMeterEffect to feed back channel data"
+HamPhraseMeter: "Custom component for move feedback progress"
+PracticeSection: "Practice section details for skills mode"
+NavigationSkeletonDir: "Dir to view shell navigation gestures in milo"
+SongDifficultyDisplay: "Song Difficulty Display"
+StarsDisplay: "Stars Display"
+StreamRecorder: "Stores a series of depth buffer textures"
+StreamRenderer: "Renders Natal stream textures into a texture."
+TransConstraint: "Object for setting up lazy transform parenting"
+HamPhotoDisplay: "Photo displayer for Hammer"
+HamRibbon: "Ribbon"
+HamPeakRibbon: "Peak Ribbon, line which chases an object"
+HamCamTransform: "Used to parent camera shots to separate areas.\nThis allows camera shots to be shared between venues."
+HamBattleData: "Data used to construct a Dance Battle"
+BustAMoveData: "Data used to construct a Bustamove session"
+CrazeHollaback: "Data used for Craze Hollaback"
+HamSupereasyData: "Moves for a super easy dance routine"
+HamPartyJumpData: "Handles jump points for this song in party mode"
+SongLayout: "Song layout"
+HamIconMan: "Icon Man to render icon man in game"
+MiniLeaderboardDisplay: "Mini Leaderboard Display"
+DepthBuffer3D: "Render the Kinect depth buffer as a 3D mesh"
+SongCollision: "Contains data for handling potential character collisions"
+MeterDisplay: "Meter Display"
+RhythmDetector: "An object that performs rhythmic analysis on Kinect input."
+RhythmBattlePlayer: "The state of a player in Rhythm Battle."
+RhythmBattle: "Competition between two RhythmBattlePlayers."
+RhythmDetectorGroup: "Group of RhythmDetectors that combines their output."
+
+objects found when extracting a milo:
+MoveDir (moves):
+-BustAMoveData, DancerSequence, HamBattleData, HamMove, HamPartyJumpData, HamSupereasyData, ObjectDir, PracticeSection, SkeletonClip, SongCollision, Tex
+-within that ObjectDir (move_data):
+    -CharClip, DancerSequence, HamMove, MoveGraph, Tex
+ObjectDir:
+-CharClip, CharLipSync, PropAnim, Sound, SynthFader, SynthSample

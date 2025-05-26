@@ -1,0 +1,8 @@
+#pragma once
+
+// MoveGraph size: 0x60
+class MoveGraph : public Hmx::Object {
+    std::map<Symbol, MoveParent*> unk2c;
+    std::map<Symbol, MoveVariant*> unk44;
+    DataArrayPtr unk5c;
+};

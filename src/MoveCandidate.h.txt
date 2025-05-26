@@ -1,0 +1,18 @@
+#pragma once
+
+// MoveCandidate size: 0x8
+struct MoveCandidate {
+    Symbol unk0; // variant name
+    unsigned int mAdjacencyFlag; // 0x4
+};
+
+void MoveCandidate::Load(BinStream& bs){
+    int rev; bs >> rev;
+    bs >> mAdjacencyFlag;
+    Symbol s1, s2, s3;
+    bs >> s1 >> s2 >> s3;
+    unk0 = s2;
+    if(rev < 1){
+        mAdjacencyFlag |= Adjacency(s3); // s3 = source?
+    }
+}

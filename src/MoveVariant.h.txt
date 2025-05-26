@@ -1,0 +1,26 @@
+#pragma once
+
+// MoveVariant size: 0x54
+class MoveVariant {
+    Vector3 mPositionOffset; // 0x0
+    Symbol unk10; // 0x10
+    MoveParent* mMoveParent; // 0x14
+    std::vector<MoveCandidate> mPrevCandidates; // 0x18
+    std::vector<MoveCandidate> mNextCandidates; // 0x24
+    Symbol mHamMoveName; // 0x30
+    Symbol mHamMoveMiloName; // 0x34
+    Symbol mLinkedTo; // 0x38
+    Symbol mLinkedFrom; // 0x3c
+    Symbol mGenre; // 0x40
+    Symbol mEra; // 0x44
+    Symbol mSongName; // 0x48
+    float mAvgBeatsPerSec; // 0x4c
+    unsigned int mFlags; // 0x50
+    // mFlags flags:
+    // & 2 = scored
+    // & 8 = final_pose
+    // & 0x10 = suppress_guide_gesture
+    // & 0x20 = omit_minigame
+    // & 0x40 = useful
+    // & 0x80 = suppress_practice_options
+};

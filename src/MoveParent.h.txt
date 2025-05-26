@@ -1,0 +1,26 @@
+#pragma once
+
+enum Difficulty {
+    kDifficultyEasy,
+    kDifficultyMedium,
+    kDifficultyExpert,
+    kDifficultyBeginner
+};
+
+// MoveParent size: 0x4C
+class MoveParent {
+    // vtable at 0x0
+    const char* unk4;
+    Difficulty mDifficulty; // 0x8
+    bool unkc;
+    std::vector<MoveVariant*> unk10;
+    std::vector<Symbol> unk1c;
+    std::vector<Symbol> unk24;
+    int unk30;
+    int unk34;
+    int unk38;
+    int unk3c;
+    int unk40;
+    int unk44;
+    int unk48;
+};

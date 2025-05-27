@@ -1,0 +1,62 @@
+#include "DancerSequence.h"
+
+void DancerSequence::Save(BinStream& bs){
+    bs << 8;
+    SAVE_SUPERCLASS(Hmx::Object)
+    SAVE_SUPERCLASS(RndAnimatable)
+    int numFrames = mDancerFrames.size();
+    bs << numFrames;
+    for(int i = 0; i < numFrames; i++){
+        bs << mDancerFrames[i].unk0;
+        bs << mDancerFrames[i].unk2;
+        DancerSkeleton* curSkeleton = mDancerFrames[i].mSkeleton;
+        for(int j = 0; j < kNumJoints; j++){
+            bs << curSkeleton->CamJointPos(j);
+            bs << curSkeleton->CamJointDisplacement(j);
+        }
+        bs << curSkeleton->ElapsedMs();
+    }
+}
+
+void DancerSequence::Load(BinStream& bs){
+    LOAD_AND_ASSERT_REVS(8, 0) // bsRev = gRev, gAltRev, bs
+    LOAD_SUPERCLASS(Hmx::Object)
+    LOAD_SUPERCLASS(RndAnimatable)
+
+    int numFrames; bs >> numFrames;
+    mDancerFrames.resize(numFrames);
+
+    for(int i = 0; i < numFrames; i++){
+        DancerFrame& curFrame = mDancerFrames[i];
+        if(gRev == 0){
+            int dummy; bs >> dummy;
+            curFrame.unk2 = -1;
+            curFrame.unk0 = -1;
+        }
+        else if(gRev < 7){
+            int i0, i2;
+            bs >> i0 >> i2;
+            curFrame.unk0 = i0;
+            curFrame.unk2 = i2;
+        }
+        else {
+            bs >> curFrame.unk0 >> curFrame.unk2;
+        }
+
+        DancerSkeleton& skeleton = curFrame.mSkeleton;
+        if(gRev < 7){
+            // a buncha gross stuff that for the purposes of DC3 I'm gonna ignore for now
+        }
+        else {
+            for(int i = 0; i < kNumJoints; i++){
+                Vector3 vpos, vdisp;
+                bs >> vpos >> vdisp;
+                skeleton.SetCamJointPos(i, vpos);
+                skeleton.SetCamJointDisplacement(i, vdisp);
+                if(gRev < 8){ int dummy; bs >> dummy; }
+            }
+            int elapsed; bs >> elapsed;
+            skeleton.SetDisplacementElapsedMs(elapsed);
+        }
+    }
+}

@@ -1,0 +1,13 @@
+#pragma once
+
+// DancerFrame size: 0x2DC
+struct DancerFrame {
+    unsigned short unk0;
+    unsigned short unk2;
+    DancerSkeleton mSkeleton; // 0x4
+};
+
+// DancerSequence size: 0x4c
+class DancerSequence : public RndAnimatable {
+    std::vector<DancerFrame> mDancerFrames; // 0x10
+};

@@ -1,0 +1,11 @@
+#pragma once
+
+// ObjRef size: 0xc
+// Object size: 0x2c
+class Hmx::Object : public ObjRef {
+    TypeProps* mTypeProps; // 0x10
+    DataArray* mTypeDef; // 0x14
+    String mName; // 0x18
+    ObjectDir* mDir; // 0x24
+    MsgSinks* mSinks; // 0x28
+};

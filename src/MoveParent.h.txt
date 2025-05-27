@@ -1,12 +1,5 @@
 #pragma once
 
-enum Difficulty {
-    kDifficultyEasy,
-    kDifficultyMedium,
-    kDifficultyExpert,
-    kDifficultyBeginner
-};
-
 // MoveParent size: 0x4C
 class MoveParent {
     // vtable at 0x0

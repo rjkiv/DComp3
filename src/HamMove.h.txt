@@ -1,13 +1,5 @@
 #pragma once
 
-enum MoveRating {
-    kMoveRatingSuperPerfect = 0,
-    kMoveRatingPerfect = 1,
-    kMoveRatingAwesome = 2,
-    kMoveRatingOk = 3,
-    kNumMoveRatings = 4
-}
-
 // String size: 0x8
 // ObjPtr size: 0x14
 
@@ -55,16 +47,8 @@ class HamMove : public RndPropAnim {
     // "id used when comparing to other moves"
     int mConfusabilityID; // 0xd4
     std::map<Hmx::CRC, float> mConfusabilities; // 0xd8
-    ObjPtr<DancerSequence>; // 0xf0
+    ObjPtr<DancerSequence> mDancerSeq; // 0xf0
 };
 
 // difficulty: "Difficulty classification for this move"
-#define DIFF_LIST (
-   (
-      "kDifficultyEasy"
-      "kDifficultyMedium"
-      "kDifficultyExpert"
-      "kDifficultyBeginner"
-   )
-)
 // confusability_count: "count of other moves I have data for"

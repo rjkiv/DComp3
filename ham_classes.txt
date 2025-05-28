@@ -56,3 +56,18 @@ MoveDir (moves):
     -CharClip, DancerSequence, HamMove, MoveGraph, Tex
 ObjectDir:
 -CharClip, CharLipSync, PropAnim, Sound, SynthFader, SynthSample
+
+TODO:
+-BustAMoveData
+-CharClip
+-CharLipSync
+-HamBattleData
+-HamPartyJumpData
+-HamSupereasyData
+-PracticeSection
+-SkeletonClip
+-SongCollision
+-Sound
+-SynthFader
+-SynthSample
+-Tex

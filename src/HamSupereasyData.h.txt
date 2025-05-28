@@ -1,0 +1,15 @@
+#pragma once
+
+(first symbol (help "MoveVariant to use for transition into measure"))
+(second symbol (help "MoveVariant to use for transition out of measure"))
+(preferred symbol (help "Preferred MoveVariant for this measure"))
+
+struct HamSupereasyMeasure {
+    Symbol first;
+    Symbol second;
+    Symbol preferred;
+};
+
+class HamSupereasyData : public Hmx::Object {
+    std::vector<HamSupereasyMeasure> mRoutine;
+};

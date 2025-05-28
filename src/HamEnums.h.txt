@@ -69,3 +69,9 @@ enum SkeletonBone {
     kBoneFootRight = 18,
     kNumBones = 19
 };
+
+enum MoveMirrored {
+    kMirroredNo = 0,
+    kMirroredYes = 1,
+    kNumMoveMirrored = 2
+};

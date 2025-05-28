@@ -1,8 +1,10 @@
 #pragma once
 
+// ObjRefOwner size: 0x4 (ABC)
 // ObjRef size: 0xc
 // Object size: 0x2c
-class Hmx::Object : public ObjRef {
+class Hmx::Object : public ObjRefOwner {
+    ObjRef mRef; // 0x4
     TypeProps* mTypeProps; // 0x10
     DataArray* mTypeDef; // 0x14
     String mName; // 0x18

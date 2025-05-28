@@ -1,0 +1,26 @@
+#include "MoveFrame.h"
+
+void MoveFrame::Save(BinStream& bs){
+    bs << unk0 << unk4 << 16;
+
+    for(int i = 0; i < 4; i++){
+        for(int j = 0; j < 2; j++){ // num mirrors?
+            for(int k = 0; k < 16; k++){
+                bs << mHam1NodeWeights[k][i + j];
+            }
+        }
+    }
+
+    for(int i = 0; i < kNumMoveMirrored; i++){
+        bs << mFrameWeights[i];
+    }
+
+    bs << FilterVersion::sNumHam2Nodes; // gets set in FilterVersion's ctor
+
+    for(int i = 0; i < 2; i++){ // num mirrors?
+        for(int j = 0; j < FilterVersion::sNumHam2Nodes; j++){
+            bs << mNodeWeights[j][i];
+            bs << mNodeScales[j][i];
+        }
+    }
+}

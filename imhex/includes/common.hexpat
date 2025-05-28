@@ -1,4 +1,5 @@
 #pragma endian big
+#pragma once
 
 import std.io;
 
@@ -62,9 +63,15 @@ struct DataArray {
 };
 
 struct Vector3 {
-    float x;
-    float y;
-    float z;
+    float x, y, z;
+};
+
+struct Quat {
+    float x, y, z, w;
+};
+
+struct Color {
+    float r, g, b, a;
 };
 
 struct TypeProps {
@@ -79,4 +86,18 @@ struct HmxObject {
     Symbol objType;
     TypeProps typeProps;
     String objName;
+};
+
+enum AnimRate: u32 {
+    k30_fps = 0,
+    k480_fpb = 1,
+    k30_fps_ui = 2,
+    k1_fpb = 3,
+    k30_fps_tutorial = 4
+};
+
+struct RndAnimatable {
+    u32 animRev;
+    float frame;
+    AnimRate rate;
 };

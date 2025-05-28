@@ -1,4 +1,5 @@
 #pragma endian big
+#pragma once
 
 enum MoveRating: u32 {
     kMoveRatingSuperPerfect = 0,

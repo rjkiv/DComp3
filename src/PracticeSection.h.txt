@@ -1,0 +1,28 @@
+#pragma once
+
+struct PracticeStep {
+    // "Type of step". Options are (learn review freestyle)
+    Symbol mType; // 0x0
+    // "Start of sequence"
+    Symbol mStart; // 0x4
+    // "End of sequence"
+    Symbol mEnd; // 0x8
+    // "True if this step is the START of a subsection"
+    bool mBoundary; // 0xc
+    // "Name to display on the PracticeChoosePanel, if left blank it tries to automatically pick one"
+    String mNameOverride; // 0x10
+};
+
+// size: 0x64
+// "Practice section details for skills mode"
+class PracticeSection : public RndAnimatable {
+    // "Difficulty this section is tied to"
+    Difficulty mDifficulty; // 0x10
+    // "Display name used to show in selection screens"
+    Symbol mDisplayName; // 0x14
+    // "List of steps for this practice section"
+    std::vector<PracticeStep> mSteps; // 0x18
+    std::vector<DancerSequence*> mSeqs; // 0x24
+    // "Index of step/sequence to test"
+    int mTestStepSequence; // 0x30
+};

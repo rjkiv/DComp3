@@ -1,0 +1,24 @@
+#pragma once
+
+struct BeatCollisionData {
+    float mMinX;
+    float mMaxX;
+    Vector3const mOffset; // start_xfm.v - end_xfm.v 
+};
+
+// size 0x5C
+class SongCollision : public Hmx::Object {
+    std::vector<BeatCollisionData> unk2c[kNumDifficulties]; // 0x2c
+    // 0x2c - vector of easy BeatCollisionDatas
+    // 0x38 - vector of medium BeatCollisionDatas
+    // 0x44 - vector of expert BeatCollisionDatas
+    // 0x50 - vector of super easy BeatCollisionDatas
+};
+
+void SongCollision::Save(BinStream& bs){
+    bs << 0x10002;
+    SAVE_SUPERCLASS(Hmx::Object);
+    for(int i = 0; i < 4; i++){
+        bs << unk2c[i];
+    }
+}

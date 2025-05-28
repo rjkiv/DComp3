@@ -21,7 +21,7 @@ struct Confusability {
 };
 
 struct HamMove {
-    u32 moveRev;
+    Revs moveRev;
     RndPropAnim superPropAnim;
     String mirror;
     String texture;

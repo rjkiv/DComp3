@@ -1,0 +1,64 @@
+#pragma once
+
+struct SkeletonFrame {
+
+};
+
+loop 0: 0x2C and 0x16C
+loop 1: 0x31C and 0x45C
+loop 2: 0x60C and 0x74C
+loop 3: 0x8FC and 0xA3C
+loop 4: 0xBEC and 0xD2C
+loop 5: 0xEDC and 0x101C
+
+SkeletonFrame * __thiscall SkeletonFrame::SkeletonFrame(SkeletonFrame *this)
+
+{
+  longlong lVar1;
+  SkeletonFrame *pSVar2;
+  
+  lVar1 = 5;
+  pSVar2 = this + 0x16c;
+  do {
+    vector_ctor_iterator(pSVar2 + -0x140,0x10,0x14,ReturnsVoid); vector[5]
+    vector_ctor_iterator(pSVar2,0x10,0x14,ReturnsVoid); vector[5]
+    lVar1 = lVar1 + -1;
+    pSVar2 = pSVar2 + 0x2f0;
+  } while (lVar1 > -1);
+  return this;
+}
+
+// size 0x1200
+class CameraInput : public virtual Hmx::Object {
+    SkeletonFrame* unk8;
+    SkeletonFrame unkc; // size 0x11c8
+};
+
+// size: 0x1278
+class SkeletonClip : public CameraInput, public RndAnimatable, public RndPollable, public SkeletonHistory {
+    struct MoveRating {
+        String mName; // 0x0
+        Symbol mExpected; // 0x8
+        int unkc; // 0xc
+    };
+
+    std::vector<RecordedFrame*> unk11f0; // 0x11f0 - sFrame
+    SkeletonFrame* unk11f4; // 0x11f4 - sCamFrame
+    String* unk11f8; // 0x11f8 - sLoadedFile
+    int unk11fc; // 0x11fc
+    DateTime mTimeRecorded; // 0x1200
+    Symbol unk1208; // 0x1208 - mSong?
+    Difficulty mDifficulty; // 0x120c
+    String mBuild; // 0x1210
+    Symbol mDefaultRating; // 0x1218
+    int mWeighted; // 0x121C
+    int mOverrideDiff; // 0x1220
+    std::vector<struct SkeletonClip::MoveRating> mMoveRatings; // 0x1224
+    bool unk1230;
+    bool unk1231;
+    FileStream* mFileStream; // 0x1234
+    String mFilePath; // 0x1238
+    int unk1240;
+    bool mAutoplay; // 0x1244
+    // Hmx::Object virtual stuff: 0x124c
+};

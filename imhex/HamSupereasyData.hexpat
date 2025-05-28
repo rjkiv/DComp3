@@ -10,7 +10,7 @@ struct HamSupereasyMeasure {
 };
 
 struct HamSupereasyData {
-    u32 superEZDataRev;
+    Revs superEZDataRev;
     HmxObject superObject;
     u32 numMeasures;
     HamSupereasyMeasure measures[numMeasures];

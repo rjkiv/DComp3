@@ -123,7 +123,7 @@ struct PropKeysPair {
 };
 
 struct RndPropAnim {
-    u32 propAnimRev;
+    Revs propAnimRev;
     HmxObject superObject;
     RndAnimatable superAnimatable;
     u32 numPropKeys;

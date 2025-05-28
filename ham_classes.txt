@@ -63,10 +63,9 @@ TODO:
 -CharLipSync
 -HamBattleData
 -HamPartyJumpData
--HamSupereasyData
+-MoveDir
+-ObjectDir
 -PracticeSection
--SkeletonClip
--SongCollision
 -Sound
 -SynthFader
 -SynthSample

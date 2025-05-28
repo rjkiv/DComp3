@@ -13,7 +13,8 @@ enum Difficulty: u32 {
     kDifficultyEasy = 0,
     kDifficultyMedium = 1,
     kDifficultyExpert = 2,
-    kDifficultyBeginner = 3
+    kDifficultyBeginner = 3,
+    kNumDifficulties = 4
 };
 
 enum SkeletonJoint: u32 {

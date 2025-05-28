@@ -18,6 +18,11 @@ struct Glob {
     u8 data[length];
 };
 
+struct Revs {
+    u16 altRev;
+    u16 rev;
+};
+
 using DataArray;
 
 struct DataNode {
@@ -82,7 +87,7 @@ struct TypeProps {
 };
 
 struct HmxObject {
-    u32 objRev;
+    Revs objRev;
     Symbol objType;
     TypeProps typeProps;
     String objName;
@@ -97,7 +102,7 @@ enum AnimRate: u32 {
 };
 
 struct RndAnimatable {
-    u32 animRev;
+    Revs animRev;
     float frame;
     AnimRate rate;
 };

@@ -1,23 +1,7 @@
 #pragma endian big
 
-import std.io;
-
-struct Symbol {
-    u32 len;
-    char value[len];
-};
-
-struct Glob {
-    u32 length;
-    u8 data[length];
-};
-
-enum Difficulty: u32 {
-    easy,
-    medium,
-    expert,
-    beginner
-};
+#include <common>
+#include <enums>
 
 struct MoveCandidate {
     u32 revision;
@@ -29,7 +13,7 @@ struct MoveCandidate {
 
 struct MoveVariant {
     u32 revision;
-    u32 idkWhatThatIs[3];
+    Vector3 posOffset;
     Symbol clipName;
     Symbol moveName;
     Symbol moveMiloname;
@@ -67,61 +51,12 @@ struct MoveParent {
     
 };
 
-using DataArray;
-
-struct DataNode {
-    u32 type;
-    match (type) {
-        (0): s32 integer;
-        (1): float integer;
-        (2): Symbol variable;
-        (3): Symbol function;
-        (4): Symbol object;
-        (5): Symbol symbol;
-        (6): s32 unhandled;
-
-        (7): Symbol ifdef_directive;
-        (8): s32 else_directive;
-        (9): s32 endif_directive;
-
-        (16): DataArray array;
-        (17): DataArray command;
-        (18): Symbol string;
-        (19): DataArray property;
-        (20): Glob glob;
-        
-        (32): Symbol define_directive;
-        (33): Symbol include_directive;
-        (34): Symbol merge_directive;
-        (35): Symbol ifndef_directive;
-        (36): s32 autorun_directive;
-        (37): Symbol undefine_directive;
-
-        (_): {
-            std::error(std::format("Invalid DataNode type value {}", type));
-            return;
-        }
-    }
-};
-
-struct DataArray {
-    u16 length;
-    u16 line;
-    u16 deprecated;
-    DataNode nodes[length];
-};
-
 struct MoveGraph {
-    u32 num;
-    MoveParent moveParent[num];
+    u32 graphRev;
+    HmxObject superObject;
+    u32 numMoveParents;
+    MoveParent moveParent[numMoveParents];
     DataArray moveArray;
 };
 
-struct MoveGraphFile {
-    u32 graphRevision;
-    u32 objectRevision;
-    u8 typePropsStuff[9];
-    MoveGraph moveGraph;
-};
-
-MoveGraphFile file @ 0;
+MoveGraph graph @ 0;

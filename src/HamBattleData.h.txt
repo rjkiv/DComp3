@@ -1,0 +1,42 @@
+#pragma once
+
+struct Range {
+    int start;
+    int end;
+};
+
+enum PlayerFlags {
+    // "Player 0"
+    kHamPlayer0 = 0,
+    // "Player 1"
+    kHamPlayer1 = 1,
+    // "Both Players"
+    kHamPlayerBoth = 2,
+    // "Neither Player"
+    kHamPlayerOff = 3,
+    // "Player 0 Solo"
+    kHamPlayer0SoloInOut = 4,
+    // "Player 1 Solo"
+    kHamPlayer1SoloInOut = 5
+};
+
+struct BattleStep {
+    // "What's going on during this section of the battle". Options are: normal, minigame
+    Symbol mState; // 0x0
+    // "Which players are involved with this section"
+    int mPlayers; // 0x4
+    // "Music loop start and end"
+    Range mMusicRange; // 0x8
+    // "Playable range of the section"
+    Range mPlayRange; // 0x10
+    // "Which camera cut to use for this section". Options are: '', Area1_NEAR, Area1_FAR, Area1_MOVEMENT, Area2_NEAR, Area2_FAR, Area2_MOVEMENT, DC_PLAYER_FREESTYLE
+    Symbol mCam; // 0x18
+    // "What the non-dancer is doing". Options are: idle, dance, hide
+    Symbol mNonplayAction; // 0x1c
+};
+
+// size: 0x38
+class HamBattleData : public Hmx::Object {
+    // "Steps for the dance battle"
+    std::vector<BattleStep> mBattleSteps; // 0x2C
+};

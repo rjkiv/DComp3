@@ -1,0 +1,72 @@
+#pragma once
+
+// ObjRefOwner size: 0x4 (ABC)
+class ObjRefOwner {
+    // vtable at 0x0
+    virtual ~ObjRefOwner(){}
+    virtual Hmx::Object* RefOwner() const = 0;
+    virtual bool Replace(ObjRef*, Hmx::Object*) = 0;
+};
+
+// ObjRef size: 0xc
+class ObjRef {
+    // vtable at 0x0
+    virtual ~ObjRef(){}
+    virtual Hmx::Object* RefOwner() const { return nullptr; }
+    virtual bool IsDirPtr(){ return false; }
+    virtual Hmx::Object* GetObj() const;
+    virtual void Replace(Hmx::Object*);
+    virtual ObjRefOwner* Parent() const { return nullptr; }
+
+    // seems to be a linked list of an Object's refs
+    ObjRef* prev; // 0x4
+    ObjRef* next; // 0x8
+};
+
+template <class T1, class T2 = class ObjectDir>
+class ObjRefConcrete : public ObjRef {
+    T1* mObj; // 0xc
+};
+
+// ObjPtr size: 0x14
+template <class T>
+class ObjPtr : public ObjRefConcrete<T, ObjectDir> {
+    ObjRefOwner* mOwner; // 0x10
+};
+
+// ObjOwnerPtr size: 0x14
+template <class T>
+class ObjOwnerPtr : public ObjRefConcrete<T, ObjectDir> {
+    ObjRefOwner* mOwner; // 0x10
+};
+
+// ObjDirPtr size: 0x14
+template <class T>
+class ObjDirPtr : public ObjRefConcrete<T, ObjectDir> {
+    DirLoader* mLoader; // 0x10
+};
+
+// ObjPtrVec size: 0x1c
+template <class T1, class T2 = class ObjectDir>
+class ObjPtrVec : public ObjRefOwner {
+    // Node size: 0x14
+    struct Node : public ObjRefConcrete<T1, T2> {
+        undefined4 unk10; // 0x10
+    };
+    std::vector<Node> mNodes; // 0x4
+    Hmx::Object* mOwner; // 0x10
+    EraseMode mEraseMode; // 0x14
+    ObjListMode mListMode; // 0x18
+};
+
+// ObjPtrList size: 0x14
+template <class T1, class T2 = class ObjectDir>
+class ObjPtrList : public ObjRefOwner {
+    struct Node : public ObjRefConcrete<T1, T2> {
+        undefined4 unk10; // 0x10
+    };
+    int unk4;
+    int unk8;
+    ObjRefOwner* mOwner; // 0xc
+    ObjListMode mListMode; // 0x10
+}

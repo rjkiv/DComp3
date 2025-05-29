@@ -1,0 +1,16 @@
+#pragma once
+
+// size 0x48
+class CharLipSync : public Hmx::Object {
+    std::vector<String> mVisemes; // 0x2c
+    int mFrames; // 0x38
+    std::vector<unsigned char> mData; // 0x3c
+};
+
+void CharLipSync::Save(BinStream& bs){
+    bs << 2;
+    SAVE_SUPERCLASS(Hmx::Object)
+    bs << mVisemes;
+    bs << mFrames;
+    bs << mData;
+}

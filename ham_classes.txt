@@ -59,7 +59,6 @@ ObjectDir:
 
 TODO:
 -CharClip
--CharLipSync
 -MoveDir
 -ObjectDir
 -Sound

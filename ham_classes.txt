@@ -58,10 +58,8 @@ ObjectDir:
 -CharClip, CharLipSync, PropAnim, Sound, SynthFader, SynthSample
 
 TODO:
--BustAMoveData
 -CharClip
 -CharLipSync
--HamPartyJumpData
 -MoveDir
 -ObjectDir
 -Sound

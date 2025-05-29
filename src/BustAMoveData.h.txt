@@ -1,0 +1,14 @@
+#pragma once
+
+struct BAMPhrase {
+    // "How many times this bar phrasing repeats". Ranges from 1 to 100.
+    int count;
+    // "How many bars per phrase". Ranges from 1 to 100.
+    int bars;
+};
+
+// size: 0x38
+// "Data used to construct a Bustamove session"
+class BustAMoveData : public Hmx::Object {
+    std::vector<BAMPhrase> mPhrases; // 0x2C
+};

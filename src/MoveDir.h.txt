@@ -1,0 +1,38 @@
+#pragma once
+
+// SkeletonDir size: 0x2C0
+// MoveDir size: 0xFDC
+class MoveDir : public SkeletonDir {
+    FilterVersion* mFilterVersion; // 0x288
+    bool mMoveOverlay; // 0x28c
+    int mDebugNodeTypes; // 0x290
+    ObjPtr<SkeletonClip> mPlayClip; // 0x294
+    ObjPtr<SkeletonClip> mRecordClip; // 0x2a8
+    ObjPtr<SkeletonClip> unk2bc;
+    ObjPtr<SkeletonClip> unk2d0;
+    int unk2e4;
+    ObjPtr<HamMove> mReportMove; // 0x2e8
+    String mImportClipPath; // 0x2fc
+    bool mFiltersEnabled; // 0x304
+    int unk308;
+    float unk30c;
+    int unk310;
+    FilterQueue* unk314;
+    // what's at 0x318? 2 0x3c sized ham related structs that's what, 1 per player
+    DoubleExponentialSmoother smoothers[2]; // 0x390
+    // 0x3c8
+    ObjPtr<DancerSequence> mDancerSequence; // 0x400
+    int unk414;
+    SkeletonViz* unk418;
+    // Object offset: 0xFA4
+};
+
+void MoveDir::Save(BinStream& bs){
+    bs << 35;
+    SAVE_SUPERCLASS(SkeletonDir);
+    bs << mFiltersEnabled;
+    bs << mMoveOverlay;
+    bs << mDebugNodeTypes;
+    bs << mImportClipPath;
+    bs << (Symbol for filter version)
+}

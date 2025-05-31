@@ -1,0 +1,24 @@
+#pragma once
+
+// PanelDir size: 0x2A4
+class PanelDir : public RndDir {
+    UIComponent *mFocusComponent; // 0x1fc
+    UIPanel* mOwnerPanel; // 0x200
+    ObjPtr<RndCam> mCam; // 0x204
+    std::list<UITrigger *> mTriggers; // 0x218
+    std::list<Flow*> mFlows; // 0x220 - new to DC3, haven't seen this one in RB3
+    std::list<UIComponent *> mComponents; // 0x228
+    bool mPostProcsBeforeDraw; // 0x230
+    bool mUseSpecifiedCam; // 0x231
+    /** "Additional panels to display behind this panel." */
+    std::vector<RndDir *> mBackPanels; // 0x234
+    /** The file paths of the aforementioned back panels. */
+    std::vector<FilePath> mBackFilenames; // 0x240
+    /** "Additional panels to display in front of this panel." */
+    std::vector<RndDir *> mFrontPanels; // 0x24c
+    /** The file paths of the aforementioned front panels. */
+    std::vector<FilePath> mFrontFilenames; // 0x258
+    bool mShowEditModePanels; // 0x264
+    bool unk265; // 0x265
+    // Hmx::Object offset: 0x26C
+};

@@ -1,0 +1,9 @@
+#pragma once
+
+// SkeletonDir size: 0x2C0
+class SkeletonDir : public PanelDir {
+    bool unk26c; // 0x26c - miloInitted?
+    // "Test clip for in-milo visualization"
+    ObjPtr<SkeletonClip> mTestClip; // 0x270
+    // Hmx::Object offset: 0x288
+};

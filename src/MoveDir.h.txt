@@ -1,6 +1,5 @@
 #pragma once
 
-// SkeletonDir size: 0x2C0
 // MoveDir size: 0xFDC
 class MoveDir : public SkeletonDir {
     FilterVersion* mFilterVersion; // 0x288

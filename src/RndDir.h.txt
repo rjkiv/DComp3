@@ -1,0 +1,12 @@
+#pragma once
+
+// RndDir size: 0x238
+class RndDir : public ObjectDir, public RndDrawable, public RndAnimatable, public RndTransformable, public RndPollable {
+    std::vector<RndDrawable*> mDraws; // 0x1b4
+    std::vector<RndAnimatable*> mAnims; // 0x1c0
+    std::vector<RndPollable*> mPolls; // 0x1cc
+    std::vector<RndPollable*> mEnters; // 0x1d8
+    ObjPtr<RndEnviron> mEnv; // 0x1e4
+    Symbol mTestEvent; // 0x1f8
+    // Hmx::Object offset: 0x200
+}

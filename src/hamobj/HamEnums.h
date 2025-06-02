@@ -98,3 +98,39 @@ enum ErrorScaleType {
     kErrorScaleDist = 0,
     kErrorScaleDistSq = 1
 };
+
+enum FilterVersionType {
+    kFilterVersionHam1 = 0,
+    kFilterVersionHam2 = 1,
+    kNumFilterVersions = 2
+};
+
+enum FilterNodes {
+    // for DC2/DC3
+    kMaxNumErrorNodes = 33
+};
+
+enum MoveMirrored {
+    kMirroredNo = 0,
+    kMirroredYes = 1,
+    kNumMoveMirrored = 2
+};
+
+enum MoveMode {
+    kNumMoveModes = 2
+};
+
+enum MoveRating {
+    kMoveRatingSuperPerfect = 0,
+    kMoveRatingPerfect = 1,
+    kMoveRatingAwesome = 2,
+    kMoveRatingOk = 3,
+    kNumMoveRatings = 4
+};
+
+enum Difficulty {
+    kDifficultyEasy,
+    kDifficultyMedium,
+    kDifficultyExpert,
+    kDifficultyBeginner
+};

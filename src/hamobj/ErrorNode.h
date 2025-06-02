@@ -5,12 +5,20 @@
 #include "HamEnums.h"
 
 struct ErrorFrameInput {
-
+    DancerSkeleton* mSkeleton; // 0x0
+    BaseSkeleton* mBaseSkeleton; // 0x4
+    float mBoneLengths[kNumBones]; // 0x8
+    float mBaseBoneLengths[kNumBones]; // 0x54
+    Vector3 mJointDisps[kNumJoints]; // 0xa0
+    Vector3 mBaseJointDisps[kNumJoints]; // 0x1e0
+    bool mDisplacements; // 0x320
+    Vector3 mJointPositions[kNumJoints]; // 0x324
+    Vector3 mBaseJointPositions[kNumJoints]; // 0x464
 };
 
 struct ErrorNodeInput {
     Vector3const mNodeComponentWeight; // 0x0
-    Ham1NodeWeight* mNodeWeight; // 0x10
+    struct Ham1NodeWeight* mNodeWeight; // 0x10
 };
 
 // examples from config/scoring.dta:
@@ -77,11 +85,16 @@ public:
 class BaseDisplacementNode : public ErrorNode {
 protected:
     struct DisplacementData {
-
+        Vector3 mJointDisplacement;
+        Vector3 mBaseJointDisplacement;
     };
 
     struct Ham1DisplacementData {
-
+        float unk0;
+        Vector3 unk4;
+        bool unk14;
+        float unk18;
+        float unk1c;
     };
 
     bool Displacements(const ErrorFrameInput&, DisplacementData&) const;
@@ -128,7 +141,9 @@ struct ScaleOp {
 class Ham1DisplacementNode : public BaseDisplacementNode {
 private:
     struct ErrorData {
-
+        float unk0;
+        float unk4;
+        float unk8;
     };
     
     ScaleOp mPotentialAngleOp; // 0x2c

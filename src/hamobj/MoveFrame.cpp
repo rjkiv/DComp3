@@ -1,5 +1,16 @@
 #include "MoveFrame.h"
 
+BinStream& operator<<(BinStream& bs, Ham1NodeWeight& obj){
+    bs << obj.unk4 << obj.unk8 << obj.unkc << obj.unk10 << obj.unk0;
+}
+
+BinStream& operator<<(BinStream& bs, Ham2FrameWeight& obj){
+    bs << obj.unk0;
+    for(int i = 0; i < 4; i++){
+        bs << obj.unk4[i] << obj.unk14[i];
+    }
+}
+
 void MoveFrame::Save(BinStream& bs){
     bs << unk0 << unk4 << 16;
 

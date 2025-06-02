@@ -87,7 +87,8 @@ enum SkeletonCoordSys {
     kCoordLeftArm = 1,
     kCoordRightArm = 2,
     kCoordLeftLeg = 3,
-    kCoordRightLeg = 4
+    kCoordRightLeg = 4,
+    kNumCoordSys = 5
 };
 
 enum NormBones {
@@ -134,3 +135,13 @@ enum Difficulty {
     kDifficultyExpert,
     kDifficultyBeginner
 };
+
+enum SkeletonSide {
+    kSkeletonLeft = 0,
+    kSkeletonRight = 1
+};
+
+// JointConfidence?
+// #define kConfidenceNotTracked (0)
+// #define kConfidenceInferred (1)
+// #define kConfidenceTracked (2)

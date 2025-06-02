@@ -1,16 +1,5 @@
 #include "DancerSkeleton.h"
 
-// DancerSkeleton size: 0x2D8
-class DancerSkeleton : public BaseSkeleton {
-    // vtable at 0
-    Vector3[kNumJoints] mCamJointPositions; // 0x4
-    Vector3[kNumJoints] mCamJointDisplacements; // 0x144
-    float[kNumBones] mCamBoneLengths; // 0x284
-    int mElapsedMs; // 0x2d0
-    bool mTracked; // 0x2d4
-};
-
-
 void DancerSkeleton::Write(BinStream& bs){
     for(int i = 0; i < kNumJoints; i++){
         bs << mCamJointPositions[i];

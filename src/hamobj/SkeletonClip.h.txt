@@ -1,5 +1,7 @@
 #pragma once
 
+// Skeleton size: 0xAD4
+
 struct SkeletonFrame {
 
 };

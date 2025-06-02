@@ -33,7 +33,7 @@ public:
 // ObjRefConcrete size: 0x10
 template <class T1, class T2 = class ObjectDir>
 class ObjRefConcrete : public ObjRef {
-private:
+protected:
     T1* mObj; // 0xc
 public:
     ObjRefConcrete(T1* obj) : mObj(obj){

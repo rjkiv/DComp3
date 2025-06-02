@@ -1,5 +1,5 @@
 #pragma once
-#include "obj/ObjRef.h"
+#include "ObjRef.h"
 #include <vector>
 
 // ObjPtr size: 0x14

@@ -1,8 +1,8 @@
 #pragma once
-#include "obj/Data.h"
-#include "obj/ObjRef.h"
-#include "obj/TypeProps.h"
-#include "utl/Str.h"
+#include "Data.h"
+#include "ObjRef.h"
+#include "TypeProps.h"
+#include "../utl/Str.h"
 
 namespace Hmx {
     // Object size: 0x2C
@@ -34,16 +34,16 @@ namespace Hmx {
         virtual void Save(BinStream&);
         virtual void Copy(const Hmx::Object*, CopyType);
         virtual void Load(BinStream&);
-        virtual void PreSave(BinStream&);
-        virtual void PostSave(BinStream&);
-        virtual void Print();
+        virtual void PreSave(BinStream&){}
+        virtual void PostSave(BinStream&){}
+        virtual void Print(){}
         virtual void Export(DataArray*, bool);
         virtual void SetTypeDef(DataArray*);
         virtual DataArray* ObjectDef(Symbol);
         virtual void SetName(const char*, ObjectDir*);
         virtual ObjectDir* DataDir();
         virtual void PreLoad(BinStream&);
-        virtual void PostLoad(BinStream&);
+        virtual void PostLoad(BinStream&){}
         virtual const char* FindPathName();
 
         Symbol Type() const;

@@ -1,7 +1,7 @@
 #pragma once
-#include "obj/ObjRef.h"
-#include "obj/ObjPtr_p.h"
-#include "obj/Data.h"
+#include "ObjRef.h"
+#include "ObjPtr_p.h"
+#include "Data.h"
 
 class TypeProps : public ObjRefOwner {
 public:

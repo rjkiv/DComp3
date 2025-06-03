@@ -74,10 +74,11 @@ u32 mEndOffset;
 
 fn RecomputeSizes(Counts cnts, CompressionType cType){
     // FIXME: the original RecomputeSizes doesn't iterate up to NUM_TYPES - 1, but rather NUM_TYPES
-    for(u32 i = 0, i < CharBonesType::NUM_TYPES - 1, i += 1){
-        mOffsets[i + 1] = (cnts.counts[i + 1] - cnts.counts[i]) * TypeSize(i, cType);
-        std::print("Set mOffsets[{}] to {} = ({} - {}) * type size {}", i,
-            mOffsets[i+1], cnts.counts[i+1], cnts.counts[i], TypeSize(i, cType));
+    // maybe that was a bug on HMX's part? either way, this func isn't 1:1
+    for(u32 i = 0, i < CharBonesType::NUM_TYPES - 1, i += 1){    
+        mOffsets[i + 1] = mOffsets[i] + (cnts.counts[i + 1] - cnts.counts[i]) * TypeSize(i, cType);
+        std::print("Set mOffsets[{}] to {} = {} + ({} - {}) * type size {}", i+1,
+            mOffsets[i+1], mOffsets[i], cnts.counts[i+1], cnts.counts[i], TypeSize(i, cType));
     }
 };
 

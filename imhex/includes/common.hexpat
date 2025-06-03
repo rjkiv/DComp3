@@ -67,8 +67,20 @@ struct DataArray {
     DataNode nodes[length];
 };
 
+struct ShortVector3 {
+    s16 x, y, z;
+};
+
 struct Vector3 {
     float x, y, z;
+};
+
+struct ByteQuat {
+    s8 x, y, z, w;
+};
+
+struct ShortQuat {
+    s16 x, y, z, w;
 };
 
 struct Quat {

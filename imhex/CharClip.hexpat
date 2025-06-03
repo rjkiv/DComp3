@@ -49,15 +49,48 @@ struct Bone {
     float weight;
 };
 
+struct Counts {
+    u32 counts[CharBonesType::NUM_TYPES];
+};
+
+fn TypeSize(CharBonesType bType, CompressionType cType){
+    if(bType == CharBonesType::TYPE_POS || bType == CharBonesType::TYPE_SCALE){
+        if(cType >= CompressionType::kCompressVects) return 6;
+        else return 12;
+    }
+    else if(bType == CharBonesType::TYPE_QUAT){
+        if(cType >= CompressionType::kCompressQuats) return 4;
+        else if(cType != CompressionType::kCompressNone) return 8;
+        else return 16;
+    }
+    else if(cType != CompressionType::kCompressNone){
+        return 2;
+    }
+    else return 4;
+};
+
+u32 mOffsets[CharBonesType::NUM_TYPES];
+u32 mEndOffset;
+
+fn RecomputeSizes(Counts cnts, CompressionType cType){
+    // FIXME: the original RecomputeSizes doesn't iterate up to NUM_TYPES - 1, but rather NUM_TYPES
+    for(u32 i = 0, i < CharBonesType::NUM_TYPES - 1, i += 1){
+        mOffsets[i + 1] = (cnts.counts[i + 1] - cnts.counts[i]) * TypeSize(i, cType);
+        std::print("Set mOffsets[{}] to {} = ({} - {}) * type size {}", i,
+            mOffsets[i+1], cnts.counts[i+1], cnts.counts[i], TypeSize(i, cType));
+    }
+};
+
 struct CharBonesSamples {
     Revs charBoneSamplesRevs;
     u32 numBones;
     Bone bones[numBones];
-    u32 counts[CharBonesType::NUM_TYPES];
+    Counts counts;
     CompressionType compression;
     u32 numSamples;
     u32 numFrames;
     float frames[numFrames];
+    RecomputeSizes(counts, compression);
 };
 
 struct CharClip {
